@@ -187,6 +187,12 @@ export default function OrderScreen() {
     }
   }
 
+  function formatCash(str) {
+ 	return str.split('').reverse().reduce((prev, next, index) => {
+ 		return ((index % 3) ? next : (next + '.')) + prev
+ 	})
+}
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -196,7 +202,7 @@ export default function OrderScreen() {
       <Helmet>
         <title>Đơn hàng</title>
       </Helmet>
-      <h1 className="my-3">Order {orderId}</h1>
+      <h1 className="my-3">Thông tin đơn hàng</h1>
       <Row>
         <Col md={8}>
           <Card className="mb-3">
@@ -261,7 +267,7 @@ export default function OrderScreen() {
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>
-                      <Col md={3}>${item.price}</Col>
+                      <Col md={3}>{formatCash(item.price.toString())} VNĐ</Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
@@ -298,7 +304,7 @@ export default function OrderScreen() {
                       <strong> Thành tiền</strong>
                     </Col>
                     <Col>
-                      <strong>${order.totalPrice.toFixed(2)}</strong>
+                      <strong>{order.totalPrice.toFixed(2)} VNĐ</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
