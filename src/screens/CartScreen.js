@@ -65,6 +65,7 @@ export default function CartScreen() {
                       <Button
                         onClick={() =>
                           updateCartHandler(item, item.quantity - 1)
+                          
                         }
                         variant="light"
                         disabled={item.quantity === 1}

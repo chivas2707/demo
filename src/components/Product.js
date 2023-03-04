@@ -28,6 +28,9 @@ function Product(props) {
       window.alert('Xin lỗi. Sản phẩm đã hết hàng');
       return;
     }
+    else {
+      window.alert('Đã thêm vào giỏ hàng');
+    }
     ctxDispatch({
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity },
@@ -50,7 +53,8 @@ function Product(props) {
             Hết hàng
           </Button>
         ) : (
-          <Button onClick={() => addToCartHandler(product)}>Thêm vào giỏ hàng</Button>
+            <Button onClick={() => addToCartHandler(product)}>Thêm vào giỏ hàng
+            </Button>
         )}
       </Card.Body>
     </Card>

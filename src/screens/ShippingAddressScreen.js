@@ -107,24 +107,7 @@ export default function ShippingAddressScreen() {
               required
             />
           </Form.Group>
-          <div className="mb-3">
-            <Button
-              id="chooseOnMap"
-              type="button"
-              variant="light"
-              onClick={() => navigate('/map')}
-            >
-              Chọn trên bản đồ
-            </Button>
-            {shippingAddress.location && shippingAddress.location.lat ? (
-              <div>
-                LAT: {shippingAddress.location.lat}
-                LNG:{shippingAddress.location.lng}
-              </div>
-            ) : (
-              <div>Không có địa chỉ</div>
-            )}
-          </div>
+        
 
           <div className="mb-3">
             <Button variant="primary" type="submit">
