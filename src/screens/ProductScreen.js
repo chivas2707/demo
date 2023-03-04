@@ -84,7 +84,7 @@ function ProductScreen() {
       window.alert('Sorry. Product is out of stock');
       return;
     } else {
-       window.alert('Sản phẩm đã được thêm vào giỏ hàng');
+      window.alert('Sản phẩm đã được thêm vào giỏ hàng');     
     }
     ctxDispatch({
       type: 'CART_ADD_ITEM',
@@ -193,7 +193,7 @@ function ProductScreen() {
                     <Col>Trạng thái:</Col>
                     <Col>
                       {product.countInStock > 0 ? (
-                        <Badge bg="success">Tồn kho</Badge>
+                        <Badge bg="success">Còn hàng</Badge>
                       ) : (
                         <Badge bg="danger">Hết hàng</Badge>
                       )}

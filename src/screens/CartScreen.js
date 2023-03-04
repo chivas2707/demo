@@ -17,6 +17,13 @@ export default function CartScreen() {
     cart: { cartItems },
   } = state;
 
+  function formatCash(str) {
+ 	return str.split('').reverse().reduce((prev, next, index) => {
+ 		return ((index % 3) ? next : (next + '.')) + prev
+ 	})
+}
+  
+
   const updateCartHandler = async (item, quantity) => {
     const { data } = await publicRequest.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
@@ -82,7 +89,7 @@ export default function CartScreen() {
                         <i className="fas fa-plus-circle"></i>
                       </Button>
                     </Col>
-                    <Col md={3}>${item.price}</Col>
+                    <Col md={3}>{formatCash(item.price.toString())} VNĐ</Col>
                     <Col md={2}>
                       <Button
                         onClick={() => removeItemHandler(item)}

@@ -5,6 +5,7 @@ import Rating from './Rating';
 import { useContext } from 'react';
 import { Store } from '../Store';
 import { publicRequest } from '../requestMethod';
+import { toast } from 'react-toastify';
 
 function Product(props) {
   const { product } = props;
@@ -27,7 +28,9 @@ function Product(props) {
     if (data.countInStock < quantity) {
       window.alert('Xin lỗi. Sản phẩm đã hết hàng');
       return;
-    }
+    } 
+      toast.success('Đã thêm sản phẩm vào giỏ hàng');
+    
     ctxDispatch({
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity },
@@ -56,4 +59,5 @@ function Product(props) {
     </Card>
   );
 }
+
 export default Product;
