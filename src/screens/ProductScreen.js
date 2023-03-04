@@ -83,6 +83,8 @@ function ProductScreen() {
     if (data.countInStock < quantity) {
       window.alert('Sorry. Product is out of stock');
       return;
+    } else {
+       window.alert('Sản phẩm đã được thêm vào giỏ hàng');
     }
     ctxDispatch({
       type: 'CART_ADD_ITEM',
