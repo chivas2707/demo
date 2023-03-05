@@ -78,11 +78,13 @@ export default function OrderScreen() {
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
   function createOrder(data, actions) {
+    console.log("order: ", order);
+
     return actions.order
       .create({
         purchase_units: [
           {
-            amount: { value: order.totalPrice },
+            amount: { value: 1 },
           },
         ],
       })
@@ -105,6 +107,8 @@ export default function OrderScreen() {
         dispatch({ type: 'PAY_SUCCESS', payload: data });
         toast.success('Order is paid');
       } catch (err) {
+        console.log("err pay:", err);
+
         dispatch({ type: 'PAY_FAIL', payload: getError(err) });
         toast.error(getError(err));
       }
@@ -121,8 +125,11 @@ export default function OrderScreen() {
         const { data } = await publicRequest.get(`/api/orders/${orderId}`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
+
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
+        console.log(err);
+
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
     };
@@ -148,6 +155,7 @@ export default function OrderScreen() {
         const { data: clientId } = await publicRequest.get('/api/keys/paypal', {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
+        console.log({ data: clientId });
         paypalDispatch({
           type: 'resetOptions',
           value: {
@@ -182,6 +190,7 @@ export default function OrderScreen() {
       dispatch({ type: 'DELIVER_SUCCESS', payload: data });
       toast.success('Order is delivered');
     } catch (err) {
+      console.log(err);
       toast.error(getError(err));
       dispatch({ type: 'DELIVER_FAIL' });
     }
@@ -308,11 +317,12 @@ export default function OrderScreen() {
                       <LoadingBox />
                     ) : (
                       <div>
-                        <PayPalButtons
-                          createOrder={createOrder}
-                          onApprove={onApprove}
-                          onError={onError}
-                        ></PayPalButtons>
+                        
+                          <PayPalButtons
+                            createOrder={createOrder}
+                            onApprove={onApprove}
+                            onError={onError}
+                          ></PayPalButtons>
                       </div>
                     )}
                     {loadingPay && <LoadingBox></LoadingBox>}
@@ -333,6 +343,6 @@ export default function OrderScreen() {
           </Card>
         </Col>
       </Row>
-    </div>
+    </div >
   );
 }

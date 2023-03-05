@@ -77,6 +77,7 @@ function ProductScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
   const addToCartHandler = async () => {
+  
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await publicRequest.get(`/api/products/${product._id}`);
