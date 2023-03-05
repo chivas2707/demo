@@ -28,9 +28,10 @@ function Product(props) {
     if (data.countInStock < quantity) {
       window.alert('Xin lỗi. Sản phẩm đã hết hàng');
       return;
-    }
-    toast.success('add product successfully');
 
+    } 
+      toast.success('Đã thêm sản phẩm vào giỏ hàng');
+    
     ctxDispatch({
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity },
@@ -59,4 +60,5 @@ function Product(props) {
     </Card>
   );
 }
+
 export default Product;

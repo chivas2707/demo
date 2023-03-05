@@ -196,6 +196,12 @@ export default function OrderScreen() {
     }
   }
 
+  function formatCash(str) {
+ 	return str.split('').reverse().reduce((prev, next, index) => {
+ 		return ((index % 3) ? next : (next + '.')) + prev
+ 	})
+}
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -205,7 +211,7 @@ export default function OrderScreen() {
       <Helmet>
         <title>Đơn hàng</title>
       </Helmet>
-      <h1 className="my-3">Order {orderId}</h1>
+      <h1 className="my-3">Thông tin đơn hàng</h1>
       <Row>
         <Col md={8}>
           <Card className="mb-3">
@@ -270,7 +276,7 @@ export default function OrderScreen() {
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>
-                      <Col md={3}>${item.price}</Col>
+                      <Col md={3}>{formatCash(item.price.toString())} VNĐ</Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
@@ -281,33 +287,33 @@ export default function OrderScreen() {
         <Col md={4}>
           <Card className="mb-3">
             <Card.Body>
-              <Card.Title>Order Summary</Card.Title>
+              <Card.Title>Tóm tắt đơn hàng </Card.Title>
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>Items</Col>
-                    <Col>${order.itemsPrice.toFixed(2)}</Col>
+                    <Col>Sản phẩm</Col>
+                    <Col>{order.itemsPrice.toFixed(2)} VNĐ</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Shipping</Col>
-                    <Col>${order.shippingPrice.toFixed(2)}</Col>
+                    <Col>Phí giao hàng</Col>
+                    <Col>{order.shippingPrice.toFixed(2)} VNĐ</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Tax</Col>
-                    <Col>${order.taxPrice.toFixed(2)}</Col>
+                    <Col>VAT</Col>
+                    <Col>{order.taxPrice.toFixed(2)} VNĐ</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>
-                      <strong> Order Total</strong>
+                      <strong> Thành tiền</strong>
                     </Col>
                     <Col>
-                      <strong>${order.totalPrice.toFixed(2)}</strong>
+                      <strong>{order.totalPrice.toFixed(2)} VNĐ</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -333,7 +339,7 @@ export default function OrderScreen() {
                     {loadingDeliver && <LoadingBox></LoadingBox>}
                     <div className="d-grid">
                       <Button type="button" onClick={deliverOrderHandler}>
-                        Deliver Order
+                        Giao hàng
                       </Button>
                     </div>
                   </ListGroup.Item>

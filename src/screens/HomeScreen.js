@@ -32,7 +32,7 @@ function HomeScreen() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await publicRequest.get("/api/products");
+        const result = await publicRequest.get("/api/products/");
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
@@ -45,7 +45,7 @@ function HomeScreen() {
   return (
     <div>
       <Helmet>
-        <title>Amazona</title>
+        <title>Team5</title>
       </Helmet>
       <h1>Sản phẩm nổi bật</h1>
       <div className="products">
@@ -60,7 +60,23 @@ function HomeScreen() {
                 <Product product={product}></Product>
               </Col>
             ))}
-          </Row>
+              </Row>              
+        )}
+      </div>
+      <h1>Sản phẩm mới</h1>
+        <div className="products">
+        {loading ? (
+          <LoadingBox />
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <Row>
+                {products.map((products) => (
+                  <Col key={products.slug} sm={6} md={4} lg={3} className="mb-3">
+                <Product product={products}></Product>
+              </Col>
+            ))}
+              </Row>     
         )}
       </div>
     </div>
