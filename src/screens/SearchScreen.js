@@ -88,11 +88,11 @@ export default function SearchScreen() {
       error: '',
     });
 
-  function format(str) {
- 	return str.split('').reverse().reduce((prev, next, index) => {
- 		return ((index % 3) ? next : (next + '.')) + prev
- 	})
-}
+//   function format(str) {
+//  	return str.split('').reverse().reduce((prev, next, index) => {
+//  		return ((index % 3) ? next : (next + '.')) + prev
+//  	})
+// }
 
   useEffect(() => {
     const fetchData = async () => {
